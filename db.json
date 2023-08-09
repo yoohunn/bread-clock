@@ -1,0 +1,24 @@
+{
+  "/bakeries": {
+    "id": 398274984,
+    "name": "빵집 이름",
+    "coordinates": "거리정보",
+    "favorite": true,
+    "breads": [{
+      "id": 34092834,
+      "available": false,
+      "available_hours": [
+        "0000 - 2359"
+      ],
+      "photo_url": ["url"]
+    },{
+      "id": 3409283334,
+      "available": true,
+      "available_hours": [
+        "0000 - 2200"
+      ],
+      "photo_url": ["url"]
+    }],
+    "photo_urls": ["url"]
+  }
+}

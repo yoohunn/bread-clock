@@ -1,10 +1,11 @@
-import { SearchBar } from "@/components/SearchBar";
+import { SearchBar } from '@/components/SearchBar';
+import { BakeryList } from '@/components/BakeryList';
 
 export default function Home() {
   return (
     <main>
-      <h1>Page</h1>
       <SearchBar />
+      <BakeryList />
     </main>
   );
 }
