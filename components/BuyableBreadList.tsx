@@ -1,13 +1,16 @@
 import { BreadTagList } from '@/components/BreadTagList';
 import Link from 'next/link';
+import { Bread } from '@/models';
 
-interface Props {}
+interface Props {
+  breads: Bread[];
+}
 
-export function BuyableBreadList({}: Props) {
+export function BuyableBreadList({ breads }: Props) {
   return (
     <section className={'relative px-4 py-6 bg-gray-300'}>
       <h3 className={'body-16-bold text-gray-700'}>살 수 있는 빵</h3>
-      <BreadTagList className={'mt-2.5 '} />
+      <BreadTagList className={'mt-2.5 '} breads={breads} />
       <button className={'btn mt-4 w-full'}>더보기</button>
 
       <Link

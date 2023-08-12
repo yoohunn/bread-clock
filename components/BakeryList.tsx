@@ -1,29 +1,25 @@
 'use client';
 
-import { BakeryItem } from '@/components/BakeryItem';
-import { Loading } from '@/components/Loading';
 import Link from 'next/link';
-import { useBakeries } from '@/hook/swr/useBakeries';
 
-interface Props extends WithClassName, WithChildren {}
-export function BakeryList({ className, children }: Props) {
-  const { bakeries } = useBakeries();
+import { BakeryItem } from '@/components/BakeryItem';
+import { BakeryDetail } from '@/models';
 
-  console.log('🌟🌟🌟🌟:bakeries ', bakeries);
-  const bakeryList = [
-    { id: 3298442 },
-    { id: 2103981 },
-    { id: 32442 },
-    { id: 21031 },
-  ];
+interface Props extends WithClassName, WithChildren {
+  bakeries?: BakeryDetail[];
+}
+export function BakeryList({ className, children, bakeries }: Props) {
+  if (!bakeries) {
+    return <></>;
+  }
   return (
     <ul
       className={`mt-4 p-4 overflow-scroll flex flex-col gap-4 flex-1 hide-scrollbar ${className}`}
     >
-      {bakeryList.map((i) => (
-        <li key={i.id}>
-          <Link href={`/bakery/${i.id}`}>
-            <BakeryItem />
+      {bakeries.map((item) => (
+        <li key={item.id}>
+          <Link href={`/bakery/${item.id}`}>
+            <BakeryItem item={item} />
           </Link>
         </li>
       ))}

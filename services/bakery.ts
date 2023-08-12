@@ -7,11 +7,11 @@ class BakeryService extends Service {
     const queryString = params ? `?${params}` : '';
     console.log('🌟🌟🌟🌟queryString: ', queryString);
 
-    return await this.client.fetch<Bakery[]>(`/bakeries${queryString}`);
+    return await this.client.fetch<BakeryDetail[]>(`/bakeries${queryString}`);
   }
 
   async getBakeries() {
-    return await this.client.fetch<Bakery[]>('/bakeries');
+    return await this.client.fetch<BakeryDetail[]>('/bakeries');
   }
 
   async getBakery(id: string) {

@@ -1,18 +1,19 @@
+import { Bread } from '@/models';
+
 interface Props extends WithClassName {
   itemClassName?: string;
+  breads: Bread[];
 }
 
-export function BreadTagList({ className, itemClassName }: Props) {
-  const breadlist = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-
+export function BreadTagList({ breads, className, itemClassName }: Props) {
   return (
     <ul className={`flex flex-wrap gap-2 ${className}`}>
-      {breadlist.map((i, index) => (
+      {breads?.map((i, index) => (
         <li key={index}>
           <div
             className={`px-2.5 py-2 rounded-xl flex-center body-15-semibold bg-white text-gray-700 ${itemClassName}`}
           >
-            빵이름1
+            {i.name}
           </div>
         </li>
       ))}

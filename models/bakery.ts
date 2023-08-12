@@ -9,14 +9,7 @@ export type Bakery = {
 
 export type BakeryDetail = {
   address: string;
-  breads: [
-    {
-      available: boolean;
-      availableHours: string[];
-      id: number;
-      photoUrl: string;
-    },
-  ];
+  breads: Bread[];
   coordinates: string;
   favorite: boolean;
   id: number;
@@ -35,4 +28,5 @@ export type Bread = {
   availableHours: string[];
   id: number;
   photoUrl: string;
+  name: string;
 };

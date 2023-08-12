@@ -4,6 +4,8 @@ import { FavoriteLink } from '@/components/FavoriteLink';
 import { BuyableBreadList } from '@/components/BuyableBreadList';
 import { BreadTimeList } from '@/components/BreadTimeList';
 import { BreadImageList } from '@/components/BreadImageList';
+import { bakeryService } from '@/services/bakery';
+import { OpeningHours } from '@/components/OpeningHours';
 
 // export async function generateStaticParams() {
 //   const bakeries = await getBakeries();
@@ -14,48 +16,48 @@ interface Props {
   params: { id: string };
 }
 
-export default function BakeryDetailPage({ params }: Props) {
+export default async function BakeryDetailPage({ params }: Props) {
+  const bakery = await bakeryService.getBakery(params.id);
+  if (!bakery) {
+    return <></>;
+  }
+  const {
+    address,
+    coordinates,
+    favorite,
+    id,
+    name,
+    openingHours,
+    photoUrls,
+    breads,
+  } = bakery;
+
+  if (!breads) {
+    return <></>;
+  }
+  console.log('🌟🌟🌟🌟bakery: ', bakery);
+
   return (
     <main className={'h-full overflow-y-scroll'}>
       <BakeryHeader />
-      <div className={'w-[375px] h-[211px] bg-[#D1C9C8]'}></div>
+      <div className={'w-[375px] h-[211px] bg-[#D1C9C8]'}>
+        {/* TODO {photoUrls[0]}*/}
+      </div>
       <section className={'px-4 py-6 flex flex-col gap-2'}>
         <div className={'flex-row-center justify-between'}>
-          <h2 className={'title-28-bold'}>빵집이름</h2>
-          <FavoriteLink />
+          <h2 className={'title-28-bold'}>{name}</h2>
+          <FavoriteLink favorite={favorite} />
         </div>
         <div className={'mt-2 text-gray-700 text-[13px] space-y-1'}>
           <div className={'flex-row-center gap-1.5'}>
             <LocationIcon className={iconClass} />
             <p>
-              서울 기역구 가나다라로98길 33 마바사빌딩 1층 <span>(350m)</span>
+              {address} <span>(350m)</span>
             </p>
           </div>
           <div className={'flex items-start gap-1.5'}>
             <TimeIcon className={`mt-[1px] ${iconClass}`} />
-            <div>
-              <p>
-                목 <span className={'ml-[3px]'}>00:00 - 00:00</span>
-              </p>
-              <p>
-                금 <span className={'ml-[3px]'}>00:00 - 00:00</span>
-              </p>
-              <p>
-                토 <span className={'ml-[3px]'}>00:00 - 00:00</span>
-              </p>
-              <p>
-                일 <span className={'ml-[3px]'}>00:00 - 00:00</span>
-              </p>
-              <p>
-                월 <span className={'ml-[3px]'}>00:00 - 00:00</span>
-              </p>
-              <p>
-                화 <span className={'ml-[3px]'}>00:00 - 00:00</span>
-              </p>
-              <p>
-                수 <span className={'ml-[3px]'}>00:00 - 00:00</span>
-              </p>
-            </div>
+            <OpeningHours openingHours={openingHours} />
             <div className={'mt-auto'}>
               <button>
                 <ChevronUpIcon className={`${iconClass} text-gray-700`} />
@@ -64,8 +66,8 @@ export default function BakeryDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
-      <BuyableBreadList />
-      <BreadTimeList />
+      <BuyableBreadList breads={breads?.filter((i) => i.available)} />
+      <BreadTimeList breads={breads} />
       <BreadImageList />
     </main>
   );

@@ -1,6 +1,6 @@
 'use client';
 import { SWRConfig } from 'swr';
-import axios from 'axios';
+import { tokenStorage } from '@/utils/token';
 
 export function SWRProvider({ children }: WithChildren) {
   return (
@@ -17,15 +17,21 @@ export function SWRProvider({ children }: WithChildren) {
   );
 }
 
-export const client = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_HOST,
-  withCredentials: true,
-});
-
 async function fetcher(url: string) {
-  console.log('swr request url:', process.env.NEXT_PUBLIC_API_HOST + url);
+  console.log('swr request url:', url);
 
-  const res = await client.get(url);
+  const res = await fetch(process.env.NEXT_PUBLIC_API_HOST + url, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${tokenStorage.access || ''}`,
+    },
+  });
 
-  return res.data;
+  if (!res.ok) {
+    const error = new Error('An error occurred while fetching the data.');
+    console.log('🚨 swr fetch error: ', res.status, await res.json());
+    throw error;
+  }
+
+  return res.json();
 }
