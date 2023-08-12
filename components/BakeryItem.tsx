@@ -11,14 +11,16 @@ export function BakeryItem({ item, className }: Props) {
 
   return (
     <article
-      className={'h-[269px] rounded-xl shadow-default flex flex-col bg-white'}
+      className={
+        'w-full h-auto rounded-xl shadow-default flex flex-col bg-white aspect-[5/3.9]'
+      }
     >
       <section
         className={
           'flex-1 rounded-t-xl bg-gray-400 flex-center overflow-hidden'
         }
       >
-        <Image src={photoUrls[0]} alt={'image'} width={343} height={193} />
+        <Image src={photoUrls[0]} alt={'image'} width={430} height={193} />
       </section>
       <section className={'p-4'}>
         <div className={'flex-row-center justify-between'}>

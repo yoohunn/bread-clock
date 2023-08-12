@@ -45,11 +45,11 @@ export default async function BakeryDetailPage({ params }: Props) {
   return (
     <main className={'h-full overflow-y-scroll'}>
       <BakeryHeader />
-      <div className='w-[375px] h-[211px] bg-gray-300 flex-center overflow-hidden'>
+      <div className='w-full h-[211px] bg-gray-300 flex-center overflow-hidden'>
         <Image
           src={photoUrls[0]}
           alt={'bakery-img'}
-          width={380}
+          width={450}
           height={211}
           priority
         />
