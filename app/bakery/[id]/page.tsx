@@ -7,12 +7,14 @@ import { BuyableBreadList } from '@/components/BuyableBreadList';
 import { BreadTimeList } from '@/components/BreadTimeList';
 import { BreadImageList } from '@/components/BreadImageList';
 import { OpeningHours } from '@/components/OpeningHours';
+import Distance from '@/components/Distance';
+import Image from 'next/image';
 
 export const revalidate = 100;
 
 export async function generateStaticParams() {
   const bakeries = await bakeryService.getBakeries();
-  return bakeries.map(({ id }) => ({ id }));
+  return bakeries.map(({ id }) => ({ id: id.toString() }));
 }
 
 interface Props {
@@ -26,7 +28,8 @@ export default async function BakeryDetailPage({ params }: Props) {
   }
   const {
     address,
-    coordinates,
+    longitude,
+    latitude,
     favorite,
     id,
     name,
@@ -38,13 +41,18 @@ export default async function BakeryDetailPage({ params }: Props) {
   if (!id || !breads) {
     return <></>;
   }
-  console.log('🌟🌟🌟🌟bakery: ', bakery);
 
   return (
     <main className={'h-full overflow-y-scroll'}>
       <BakeryHeader />
-      <div className={'w-[375px] h-[211px] bg-[#D1C9C8]'}>
-        {/* TODO {photoUrls[0]}*/}
+      <div className='w-[375px] h-[211px] bg-gray-300 flex-center overflow-hidden'>
+        <Image
+          src={photoUrls[0]}
+          alt={'bakery-img'}
+          width={380}
+          height={211}
+          priority
+        />
       </div>
       <section className={'px-4 py-6 flex flex-col gap-2'}>
         <div className={'flex-row-center justify-between'}>
@@ -55,7 +63,10 @@ export default async function BakeryDetailPage({ params }: Props) {
           <div className={'flex-row-center gap-1.5'}>
             <LocationIcon className={iconClass} />
             <p>
-              {address} <span>(350m)</span>
+              {address}{' '}
+              <span>
+                <Distance latitude={latitude} longitude={longitude} />
+              </span>
             </p>
           </div>
           <div className={'flex items-start gap-1.5'}>
@@ -71,7 +82,7 @@ export default async function BakeryDetailPage({ params }: Props) {
       </section>
       <BuyableBreadList id={id} breads={breads?.filter((i) => i.available)} />
       <BreadTimeList breads={breads} />
-      <BreadImageList />
+      <BreadImageList photoUrls={photoUrls} />
     </main>
   );
 }

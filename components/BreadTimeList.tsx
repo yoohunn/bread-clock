@@ -19,7 +19,7 @@ export function BreadTimeList({ breads, className }: Props) {
           </li>
         ))}
       </ul>
-      <button className={'btn mt-4 w-full'}>더보기</button>
+      {/*<button className={'btn mt-4 w-full'}>더보기</button>*/}
     </section>
   );
 }

@@ -10,7 +10,8 @@ export type Bakery = {
 export type BakeryDetail = {
   address: string;
   breads: Bread[];
-  coordinates: string;
+  latitude: number;
+  longitude: number;
   favorite: boolean;
   id: number;
   name: string;

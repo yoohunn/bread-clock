@@ -9,6 +9,9 @@ import { userService } from '@/services/user';
 export function useFavorite(id: number) {
   const { data: bakery, mutate } = useSWRImmutable<BakeryDetail>(
     `/bakeries/${id}`,
+    {
+      keepPreviousData: true,
+    },
   );
 
   const toggle = async (favorite: boolean) => {

@@ -5,13 +5,14 @@ import useSWR from 'swr';
 import type { BakeryDetail, AvailableBread } from '@/models';
 import { bakeryService } from '@/services/bakery';
 import { toast } from 'react-hot-toast';
+import useSWRImmutable from 'swr/immutable';
 
 export function useBakery(id: number) {
   const {
     data: bakery,
     isLoading,
     mutate,
-  } = useSWR<BakeryDetail>(`/bakeries/${id}`, {
+  } = useSWRImmutable<BakeryDetail>(`/bakeries/${id}`, {
     keepPreviousData: true,
   });
 
