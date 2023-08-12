@@ -1,10 +1,14 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { UserCircleIcon } from '@/components/ui';
 import { GoogleButton } from '@/components/GoogleButton';
 import { OpenBottomDrawer } from '@/components/OpenBottomDrawer';
+import { tokenStorage } from '@/utils/token';
 
 export function UserButton() {
+  const router = useRouter();
   const user = false;
   return (
     <OpenBottomDrawer
@@ -19,7 +23,15 @@ export function UserButton() {
           <h2 className={'title-22-bold text-gray-900'}>
             로그아웃 하시겠어요?
           </h2>
-          <button className={'btn-white'}>로그아웃</button>
+          <button
+            className={'btn-white'}
+            onClick={() => {
+              tokenStorage.remove();
+              router.push('/');
+            }}
+          >
+            로그아웃
+          </button>
         </>
       ) : (
         <>

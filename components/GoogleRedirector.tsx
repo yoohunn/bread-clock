@@ -14,6 +14,7 @@ export function GoogleAuthRedirector() {
   const signIn = useCallback(async () => {
     const access = await googleService.signIn(code);
     if (access) {
+      router.refresh();
       router.push(`/search`);
     }
   }, [code, router]);

@@ -8,7 +8,7 @@ class TokenStorage {
   setAccess(token: string) {
     return Cookies.set(ACCESS_TOKEN, token);
   }
-  remove(name: string) {
+  remove() {
     Cookies.remove(ACCESS_TOKEN);
   }
 }
