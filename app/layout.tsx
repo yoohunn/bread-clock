@@ -24,7 +24,7 @@ export default function RootLayout({
           <div
             id={'container'}
             className={
-              'relative mx-auto w-full h-screen max-w-[428px] max-h-[926px] overflow-y-hidden bg-gray-200'
+              'relative mx-auto w-full h-[100dvh] max-w-[428px] max-h-[926px] overflow-y-hidden bg-gray-200'
             }
           >
             {children}

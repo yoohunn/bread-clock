@@ -7,7 +7,7 @@ export function SearchHeader() {
   return (
     <header className='pt-4 px-4 h-16 flex-row-center justify-between'>
       <Link href={'/'}>
-        <LogoIcon className={'w-20 h-[27px]'} />
+        <LogoIcon className={'w-20 h-[27px] text-primary-800'} />
       </Link>
       <UserButton />
     </header>
