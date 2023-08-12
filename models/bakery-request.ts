@@ -1,13 +1,18 @@
 export type UpdateBreadSoldoutRequest = {
-  breads: {
-    available: boolean;
-    id: number;
-  }[];
+  breads: AvailableBread[];
 };
 
-export type BakerySearchParams = {
+export type AvailableBread = {
+  available: boolean;
+  id: number;
+};
+
+export type SearchBakeryParams = BakeryParams & {
   q?: string;
-  sort: string;
+};
+
+export type BakeryParams = {
+  sort?: string;
   size?: string;
   offset?: string;
   filter?: string;

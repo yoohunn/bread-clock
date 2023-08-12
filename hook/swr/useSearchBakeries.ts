@@ -2,13 +2,13 @@
 
 import useSWR from 'swr';
 
-import type { BakeryParams, BakeryDetail } from '@/models';
+import type { SearchBakeryParams, BakeryDetail } from '@/models';
 
-export function useBakeries(searchParams?: BakeryParams) {
+export function useSearchBakeries(searchParams?: SearchBakeryParams) {
   const params = new URLSearchParams(searchParams).toString();
   const queryString = params ? `?${params}` : '';
 
-  const { data: bakeries } = useSWR<BakeryDetail[]>(`/bakeries${queryString}`, {
+  const { data: bakeries } = useSWR<BakeryDetail[]>(`/search${queryString}`, {
     keepPreviousData: true,
   });
 

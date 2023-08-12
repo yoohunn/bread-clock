@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { BakeryDetail } from '@/models';
 
@@ -12,6 +14,7 @@ export function BakeryItem({ item, className }: Props) {
       className={'h-[269px] rounded-xl shadow-default flex flex-col bg-white'}
     >
       <section className={'flex-1 rounded-t-xl bg-gray-400'}>
+        {/*<Image src={photoUrls[0]} alt={'image'} width={343} height={193} />*/}
         {/*  TODO: Image src=photoUrls[0] */}
       </section>
       <section className={'p-4'}>

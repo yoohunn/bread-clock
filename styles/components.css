@@ -90,3 +90,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.tag-container {
+  @apply flex flex-wrap gap-2
+}
+
+.tag-base {
+  @apply px-2.5 py-2 rounded-xl flex-center body-15-semibold bg-white
+}
+
+.tag {
+  @apply tag-base text-gray-700
+}
+
+.tag-inactive {
+  @apply tag-base text-gray-400
+}

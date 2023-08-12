@@ -33,7 +33,7 @@ export default async function BakeryDetailPage({ params }: Props) {
     breads,
   } = bakery;
 
-  if (!breads) {
+  if (!id || !breads) {
     return <></>;
   }
   console.log('🌟🌟🌟🌟bakery: ', bakery);
@@ -67,7 +67,7 @@ export default async function BakeryDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
-      <BuyableBreadList breads={breads?.filter((i) => i.available)} />
+      <BuyableBreadList id={id} breads={breads?.filter((i) => i.available)} />
       <BreadTimeList breads={breads} />
       <BreadImageList />
     </main>

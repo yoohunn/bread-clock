@@ -1,12 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import useSWR, { useSWRConfig } from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { toast } from 'react-hot-toast';
 
-import { userService } from '@/services/user';
 import { BakeryDetail } from '@/models';
-import useSWRImmutable from 'swr/immutable';
+import { userService } from '@/services/user';
 
 export function useFavorite(id: number) {
   const { data: bakery, mutate } = useSWRImmutable<BakeryDetail>(
@@ -14,18 +12,15 @@ export function useFavorite(id: number) {
   );
 
   const toggle = async (favorite: boolean) => {
-    console.log('🌟🌟🌟🌟toggle: ', favorite);
     if (!bakery) {
       return;
     }
     if (favorite) {
-      console.log('🌟🌟🌟🌟delete: ');
       await userService.removeFavorite(id.toString());
-      toast.success('즐겨찾기에서 삭제했어요!');
+      toast('즐겨찾기에서 삭제했어요!');
     } else {
-      console.log('🌟🌟🌟🌟add: ');
       await userService.addToFavorite(id.toString());
-      toast.error('즐겨찾기를 수정하지 못했습니다.');
+      toast('즐겨찾기에 저장되었어요!');
     }
 
     mutate({

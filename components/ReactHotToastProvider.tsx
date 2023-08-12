@@ -8,11 +8,14 @@ export function ReactHotToastProvider() {
       reverseOrder={false}
       toastOptions={{
         style: {
-          backgroundColor: 'rgba(255, 255, 255, 0.85)',
+          backgroundColor: '#33312C',
           fontWeight: 500,
-          padding: '10px 16px',
+          padding: '12px 16px',
+          color: 'white',
+          fontSize: 15,
+          height: 47,
         },
-        className: 'backdrop-blur-sm',
+        duration: 8000,
       }}
     />
   );
