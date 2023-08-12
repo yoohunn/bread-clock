@@ -1,9 +1,15 @@
+'use client';
+
 import { BakeryItem } from '@/components/BakeryItem';
 import { Loading } from '@/components/Loading';
 import Link from 'next/link';
+import { useBakeries } from '@/hook/swr/useBakeries';
 
 interface Props extends WithClassName, WithChildren {}
 export function BakeryList({ className, children }: Props) {
+  const { bakeries } = useBakeries();
+
+  console.log('🌟🌟🌟🌟:bakeries ', bakeries);
   const bakeryList = [
     { id: 3298442 },
     { id: 2103981 },
