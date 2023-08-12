@@ -32,6 +32,5 @@ async function fetcher(url: string) {
     console.log('🚨 swr fetch error: ', res.status, await res.json());
     throw error;
   }
-
-  return res.json();
+  return await res?.json();
 }

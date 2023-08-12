@@ -1,10 +1,11 @@
+import { bakeryService } from '@/services/bakery';
+
 import { ChevronUpIcon, LocationIcon, TimeIcon } from '@/components/ui';
 import { BakeryHeader } from '@/components/BakeryHeader';
-import { FavoriteLink } from '@/components/FavoriteLink';
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { BuyableBreadList } from '@/components/BuyableBreadList';
 import { BreadTimeList } from '@/components/BreadTimeList';
 import { BreadImageList } from '@/components/BreadImageList';
-import { bakeryService } from '@/services/bakery';
 import { OpeningHours } from '@/components/OpeningHours';
 
 // export async function generateStaticParams() {
@@ -46,7 +47,7 @@ export default async function BakeryDetailPage({ params }: Props) {
       <section className={'px-4 py-6 flex flex-col gap-2'}>
         <div className={'flex-row-center justify-between'}>
           <h2 className={'title-28-bold'}>{name}</h2>
-          <FavoriteLink favorite={favorite} />
+          <FavoriteButton id={id} />
         </div>
         <div className={'mt-2 text-gray-700 text-[13px] space-y-1'}>
           <div className={'flex-row-center gap-1.5'}>

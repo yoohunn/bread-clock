@@ -7,31 +7,44 @@ interface GoogleResponse {
   id_token: string;
 }
 
+interface SignInResponse {
+  accessToken: string;
+  provider: string;
+  email: string;
+  avatarUrl: string;
+}
+
 class GoogleService extends Service {
   private async getToken(code: string) {
-    const { access_token: access } = await this.client.post<GoogleResponse>(
-      'https://oauth2.googleapis.com/token',
-      {
-        code,
-        grant_type: 'authorization_code',
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET,
-        redirect_uri:
-          process.env.NEXT_PUBLIC_BASE_URL + '/auth/redirect/google',
-      },
-    );
+    const params = new URLSearchParams({
+      code,
+      grant_type: 'authorization_code',
+      client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '',
+      client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || '',
+      redirect_uri: process.env.NEXT_PUBLIC_BASE_URL + '/auth/redirect/google',
+    });
 
-    this.cookie.set('google_access', access);
-    return access;
+    const response = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params.toString(),
+    });
+
+    const data = await response.json();
+    return data.access_token;
   }
 
   async signIn(code?: string) {
     const accessToken = await this.getToken(code!);
-
-    return await this.client.post('/auth/login/google', {
+    const res = await this.client.post<SignInResponse>('/auth/login/google', {
       accessToken,
       provider: 'google',
     });
+    const data = res.data;
+    this.tokenStorage.setAccess(data.accessToken);
+    return data.accessToken;
   }
 }
 
