@@ -19,7 +19,7 @@ export function SearchList({ fallback }: Props) {
     undefined,
   );
 
-  const { bakeries } = useSearchBakeries(params, fallback);
+  const { bakeries, isValidating } = useSearchBakeries(params, fallback);
 
   const onClick = () => {
     setParams({ q: query });
@@ -31,11 +31,7 @@ export function SearchList({ fallback }: Props) {
       <BakeryList
         className={'h-[calc(100%-200px)] bg-gray-300'}
         bakeries={bakeries}
-      >
-        <div className={'py-6 flex-center'}>
-          <Loading />
-        </div>
-      </BakeryList>
+      />
     </>
   );
 }

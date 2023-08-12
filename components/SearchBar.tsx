@@ -8,7 +8,7 @@ interface Props extends WithClassName {
 }
 export function SearchBar({ className, query, onChange, onClick }: Props) {
   return (
-    <div className={`mt-2 px-4 w-full ${className}`}>
+    <form className={`mt-2 px-4 w-full ${className}`}>
       <label
         className={`flex bg-white rounded-xl focus-within:ring-[1.4px] focus-within:ring-primary-800`}
       >
@@ -19,10 +19,16 @@ export function SearchBar({ className, query, onChange, onClick }: Props) {
           placeholder='검색어를 입력하세요...'
           className={'px-4 flex-1 bg-transparent'}
         />
-        <button className={'p-3'} onClick={onClick}>
+        <button
+          className={'p-3'}
+          onClick={(e) => {
+            e.preventDefault();
+            onClick();
+          }}
+        >
           <SearchIcon className={'w-6 h-6 text-gray-700'} />
         </button>
       </label>
-    </div>
+    </form>
   );
 }

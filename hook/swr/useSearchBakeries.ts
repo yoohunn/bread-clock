@@ -11,10 +11,13 @@ export function useSearchBakeries(
   const params = new URLSearchParams(searchParams).toString();
   const queryString = params ? `?${params}` : '';
 
-  const { data: bakeries } = useSWR<BakeryDetail[]>(`/search${queryString}`, {
-    keepPreviousData: true,
-    fallback,
-  });
+  const { data: bakeries, isValidating } = useSWR<BakeryDetail[]>(
+    `/search${queryString}`,
+    {
+      keepPreviousData: true,
+      fallback,
+    },
+  );
 
-  return { bakeries };
+  return { bakeries, isValidating };
 }

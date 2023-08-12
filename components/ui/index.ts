@@ -12,3 +12,4 @@ export { StartIcon } from './StartIcon';
 export { TimeIcon } from './TimeIcon';
 export { UserCircleIcon } from './UserCircleIcon';
 export { XCircleFillIcon } from './XCircleFillIcon';
+export { Pattern } from './Pattern';
