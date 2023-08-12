@@ -1,9 +1,9 @@
 'use client';
 import type { ChangeEvent } from 'react';
 import { useState, useEffect, useCallback } from 'react';
+import { SearchIcon } from '@/components/ui';
 
-
-export function SearchBar() {
+export function SearchBar({ className }: WithClassName) {
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
@@ -36,22 +36,21 @@ export function SearchBar() {
   };
 
   return (
-    <div>
-      <input
-        type='text'
-        value={searchTerm}
-        onChange={onChange}
-        placeholder='검색어를 입력하세요...'
-      />
-      <ul>
-        {suggestions.map((suggestion, index) => (
-          <li key={index}>
-            <button onClick={() => onClick(suggestion)} className='w-full'>
-              {suggestion}
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div className={`mt-2 px-4 w-full ${className}`}>
+      <label
+        className={`flex bg-white rounded-xl focus-within:ring-[1.4px] focus-within:ring-primary-800`}
+      >
+        <input
+          type='text'
+          value={searchTerm}
+          onChange={onChange}
+          placeholder='검색어를 입력하세요...'
+          className={'px-4 flex-1 bg-transparent'}
+        />
+        <button className={'p-3'}>
+          <SearchIcon className={'w-6 h-6 text-gray-700'} />
+        </button>
+      </label>
     </div>
   );
 }
