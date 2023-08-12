@@ -1,16 +1,17 @@
-import { SearchBar } from '@/components/SearchBar';
-import { BakeryList } from '@/components/BakeryList';
 import { SearchHeader } from '@/components/Header';
 import { BottomNav } from '@/components/BottomNav';
-import { Loading } from '@/components/Loading';
-import { bakeryService } from '@/services/bakery';
 import { SearchList } from '@/components/SearchList';
+import { bakeryService } from '@/services/bakery';
+
+export const revalidate = 100;
 
 export default async function SearchPage() {
+  const bakeries = await bakeryService.getBakeries();
+
   return (
     <main className={'h-full'}>
       <SearchHeader />
-      <SearchList />
+      <SearchList fallback={bakeries} />
       <BottomNav />
     </main>
   );

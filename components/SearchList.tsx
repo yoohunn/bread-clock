@@ -2,21 +2,24 @@
 
 import { useState } from 'react';
 
-import { SearchBakeryParams } from '@/models';
+import { BakeryDetail, SearchBakeryParams } from '@/models';
+import { useSearchBakeries } from '@/hook/swr/useSearchBakeries';
+
 import { SearchBar } from '@/components/SearchBar';
 import { BakeryList } from '@/components/BakeryList';
 import { Loading } from '@/components/Loading';
-import { useSearchBakeries } from '@/hook/swr/useSearchBakeries';
 
-interface Props {}
+interface Props {
+  fallback?: BakeryDetail[];
+}
 
-export function SearchList({}: Props) {
+export function SearchList({ fallback }: Props) {
   const [query, setQuery] = useState('');
   const [params, setParams] = useState<SearchBakeryParams | undefined>(
     undefined,
   );
 
-  const { bakeries } = useSearchBakeries(params);
+  const { bakeries } = useSearchBakeries(params, fallback);
 
   const onClick = () => {
     setParams({ q: query });

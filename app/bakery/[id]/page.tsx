@@ -8,10 +8,12 @@ import { BreadTimeList } from '@/components/BreadTimeList';
 import { BreadImageList } from '@/components/BreadImageList';
 import { OpeningHours } from '@/components/OpeningHours';
 
-// export async function generateStaticParams() {
-//   const bakeries = await getBakeries();
-//   return bakeries.map(({ id }) => ({ id }));
-// }
+export const revalidate = 100;
+
+export async function generateStaticParams() {
+  const bakeries = await bakeryService.getBakeries();
+  return bakeries.map(({ id }) => ({ id }));
+}
 
 interface Props {
   params: { id: string };
