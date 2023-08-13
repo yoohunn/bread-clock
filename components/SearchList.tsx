@@ -14,14 +14,14 @@ interface Props {
 
 export function SearchList({ fallback }: Props) {
   const [query, setQuery] = useState('');
-  const [params, setParams] = useState<SearchBakeryParams | undefined>(
-    undefined,
-  );
+  const [params, setParams] = useState<SearchBakeryParams | undefined>({
+    size: '50',
+  });
 
   const { bakeries, isValidating } = useSearchBakeries(params, fallback);
 
   const onClick = () => {
-    setParams({ q: query });
+    setParams((prev) => ({ ...prev, q: query }));
   };
 
   return (
