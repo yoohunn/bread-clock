@@ -3,14 +3,26 @@
 import Link from 'next/link';
 
 import { BakeryItem } from '@/components/BakeryItem';
-import { BakeryDetail } from '@/models';
+import { BakeryDetail, Bread } from '@/models';
 
 interface Props extends WithClassName, WithChildren {
   bakeries?: BakeryDetail[];
+  searched?: boolean;
 }
-export function BakeryList({ className, children, bakeries }: Props) {
+export function BakeryList({ className, children, bakeries, searched }: Props) {
   if (!bakeries) {
     return <></>;
+  }
+  if (bakeries.length === 0) {
+    return (
+      <div className='mt-4 w-full px-4 py-10'>
+        <p className='body-16-regular text-center text-gray-700'>
+          검색 결과가 없습니다.
+          <br />
+          다시 검색해 주세요.
+        </p>
+      </div>
+    );
   }
   return (
     <ul
@@ -19,7 +31,10 @@ export function BakeryList({ className, children, bakeries }: Props) {
       {bakeries.map((item) => (
         <li key={item.id}>
           <Link href={`/bakery/${item.id}`}>
-            <BakeryItem item={item} />
+            <BakeryItem
+              item={item}
+              searched={searched ? item.breads[0] : undefined}
+            />
           </Link>
         </li>
       ))}

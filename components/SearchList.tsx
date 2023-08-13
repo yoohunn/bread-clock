@@ -7,7 +7,6 @@ import { useSearchBakeries } from '@/hook/swr/useSearchBakeries';
 
 import { SearchBar } from '@/components/SearchBar';
 import { BakeryList } from '@/components/BakeryList';
-import { Loading } from '@/components/Loading';
 
 interface Props {
   fallback?: BakeryDetail[];
@@ -31,6 +30,7 @@ export function SearchList({ fallback }: Props) {
       <BakeryList
         className={'h-[calc(100%-200px)] bg-gray-300'}
         bakeries={bakeries}
+        searched={Boolean(params?.q)}
       />
     </>
   );
