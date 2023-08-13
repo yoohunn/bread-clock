@@ -4,6 +4,7 @@ import { BreadTagList } from '@/components/BreadTagList';
 import Link from 'next/link';
 import { Bread } from '@/models';
 import { useBakery } from '@/hook/swr/useBakery';
+import { AuthDrawerButton } from '@/components/AuthDrawerButton';
 
 interface Props {
   breads: Bread[];
@@ -20,14 +21,15 @@ export function BuyableBreadList({ id }: Props) {
       <BreadTagList className={'mt-2.5 '} breads={filtered} />
       {/*<button className={'btn mt-4 w-full'}>더보기</button>*/}
 
-      <Link
-        href={`/bakery/sold-out?id=${id}`}
-        className={
-          'absolute top-7 right-4 callout-13-semibold text-primary-800'
-        }
+      <AuthDrawerButton
+        buttonNode={<button className={btnClass}>매진 체크</button>}
       >
-        매진 체크
-      </Link>
+        <Link href={`/bakery/sold-out?id=${id}`} className={btnClass}>
+          매진 체크
+        </Link>
+      </AuthDrawerButton>
     </section>
   );
 }
+
+const btnClass = 'absolute top-7 right-4 callout-13-semibold text-primary-800';

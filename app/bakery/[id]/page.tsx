@@ -1,4 +1,5 @@
 import { bakeryService } from '@/services/bakery';
+import Image from 'next/image';
 
 import { ChevronUpIcon, LocationIcon, TimeIcon } from '@/components/ui';
 import { BakeryHeader } from '@/components/BakeryHeader';
@@ -7,8 +8,7 @@ import { BuyableBreadList } from '@/components/BuyableBreadList';
 import { BreadTimeList } from '@/components/BreadTimeList';
 import { BreadImageList } from '@/components/BreadImageList';
 import { OpeningHours } from '@/components/OpeningHours';
-import Distance from '@/components/Distance';
-import Image from 'next/image';
+import { Distance } from '@/components/Distance';
 
 export const revalidate = 100;
 
@@ -71,12 +71,7 @@ export default async function BakeryDetailPage({ params }: Props) {
           </div>
           <div className={'flex items-start gap-1.5'}>
             <TimeIcon className={`mt-[1px] ${iconClass}`} />
-            <OpeningHours openingHours={openingHours} />
-            <div className={'mt-auto'}>
-              <button>
-                <ChevronUpIcon className={`${iconClass} text-gray-700`} />
-              </button>
-            </div>
+            {openingHours && <OpeningHours openingHours={openingHours} />}
           </div>
         </div>
       </section>

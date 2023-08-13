@@ -1,11 +1,11 @@
 'use client';
 
-import useSWR from 'swr';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+import useSWRImmutable from 'swr/immutable';
 
 import type { BakeryDetail, AvailableBread } from '@/models';
 import { bakeryService } from '@/services/bakery';
-import { toast } from 'react-hot-toast';
-import useSWRImmutable from 'swr/immutable';
 
 export function useBakery(id: number) {
   const {
@@ -16,10 +16,13 @@ export function useBakery(id: number) {
     keepPreviousData: true,
   });
 
+  const router = useRouter();
+
   const updateAvailable = async (available: AvailableBread[]) => {
     await bakeryService.updateSoldoutBreads(id.toString(), {
       breads: available,
     });
+    router.push(`/bakery/${id}`);
     toast('변경 사항이 저장되었습니다.');
     mutate();
   };

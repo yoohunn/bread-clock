@@ -1,11 +1,12 @@
 import { GoogleIcon } from '@/components/ui';
+import Link from 'next/link';
 
 export function GoogleButton() {
   return (
-    <a className={'btn-white w-full'} href={href}>
+    <Link href={href} className={'btn-white w-full'}>
       <GoogleIcon />
       <span>구글로 시작하기</span>
-    </a>
+    </Link>
   );
 }
 

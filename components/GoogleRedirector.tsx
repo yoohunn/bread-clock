@@ -1,27 +1,19 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
-import { googleService } from '@/services/google';
+import { useUser } from '@/hook/swr/useUser';
 
 export function GoogleAuthRedirector() {
   const searchParams = useSearchParams();
   const code = searchParams.get('code') || '';
 
-  const router = useRouter();
-
-  const signIn = useCallback(async () => {
-    const access = await googleService.signIn(code);
-    if (access) {
-      router.refresh();
-      router.push(`/search`);
-    }
-  }, [code, router]);
+  const { signIn } = useUser();
 
   useEffect(() => {
-    signIn();
-  }, [signIn]);
+    signIn(code);
+  }, [signIn, code]);
 
   return (
     <section className='flex-1 flex-center py-20'>

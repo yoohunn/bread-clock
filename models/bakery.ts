@@ -31,3 +31,7 @@ export type Bread = {
   photoUrl: string;
   name: string;
 };
+
+export type DaysOfWeek = OpeningHour & {
+  name: string;
+};

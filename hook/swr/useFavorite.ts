@@ -5,17 +5,15 @@ import { toast } from 'react-hot-toast';
 
 import { BakeryDetail } from '@/models';
 import { userService } from '@/services/user';
+import { tokenStorage } from '@/utils/token';
 
 export function useFavorite(id: number) {
   const { data: bakery, mutate } = useSWRImmutable<BakeryDetail>(
-    `/bakeries/${id}`,
-    {
-      keepPreviousData: true,
-    },
+    tokenStorage.access ? `/bakeries/${id}` : null,
   );
 
   const toggle = async (favorite: boolean) => {
-    if (!bakery) {
+    if (!tokenStorage.access || !bakery) {
       return;
     }
     if (favorite) {

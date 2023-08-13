@@ -2,14 +2,17 @@
 
 import { useRouter } from 'next/navigation';
 
+import { useUser } from '@/hook/swr/useUser';
+import { tokenStorage } from '@/utils/token';
+
 import { UserCircleIcon } from '@/components/ui';
 import { GoogleButton } from '@/components/GoogleButton';
 import { OpenBottomDrawer } from '@/components/OpenBottomDrawer';
-import { tokenStorage } from '@/utils/token';
 
 export function UserButton() {
   const router = useRouter();
-  const user = false;
+  const { user } = useUser();
+
   return (
     <OpenBottomDrawer
       buttonNode={

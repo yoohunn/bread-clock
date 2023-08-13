@@ -1,18 +1,5 @@
 import { Service } from '@/services';
-
-interface GoogleResponse {
-  access_token: string;
-  scope: string;
-  token_type: string;
-  id_token: string;
-}
-
-interface SignInResponse {
-  accessToken: string;
-  provider: string;
-  email: string;
-  avatarUrl: string;
-}
+import { SignInResponse } from '@/models';
 
 class GoogleService extends Service {
   private async getToken(code: string) {
@@ -37,13 +24,15 @@ class GoogleService extends Service {
   }
 
   async signIn(code?: string) {
-    const accessToken = await this.getToken(code!);
+    const googleAccessToken = await this.getToken(code!);
     const res = await this.client.post<SignInResponse>('/auth/login/google', {
-      accessToken,
+      accessToken: googleAccessToken,
       provider: 'google',
     });
     const data = res.data;
-    this.tokenStorage.setAccess(data.accessToken);
+    const accessToken = data.accessToken;
+    this.tokenStorage.setAccess(accessToken);
+
     return data.accessToken;
   }
 }

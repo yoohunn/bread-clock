@@ -1,5 +1,11 @@
 'use client';
-import { cloneElement, ReactNode, useState, ReactElement } from 'react';
+import {
+  cloneElement,
+  ReactNode,
+  useState,
+  ReactElement,
+  MouseEvent,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 
@@ -13,9 +19,16 @@ export function OpenBottomDrawer({ buttonNode, children }: Props) {
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
 
+  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    open();
+  };
+
   return (
     <>
-      {cloneElement(buttonNode as ReactElement, { onClick: open })}
+      {cloneElement(buttonNode as ReactElement, { onClick })}
       {isOpen && (
         <PortalOverlay isOpen={isOpen} close={close}>
           <BottomSheet close={close}>
@@ -54,6 +67,8 @@ export function BottomSheet({ children, className, close }: BottomSheetProps) {
       }}
       className={'absolute inset-0 bg-black/20'}
       onClick={(e) => {
+        e.stopPropagation();
+
         if (e.target === e.currentTarget) {
           close();
         }

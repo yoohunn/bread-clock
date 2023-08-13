@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'blogfiles.naver.net',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

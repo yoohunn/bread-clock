@@ -4,8 +4,6 @@ interface Props extends WithClassName {
   photoUrls: string[];
 }
 export function BreadImageList({ className, photoUrls }: Props) {
-  const length = photoUrls.length;
-
   return (
     <section className={'px-4 py-6 border-t border-gray-300'}>
       <h3 className={'body-16-bold text-gray-700'}>사진</h3>
@@ -96,6 +94,7 @@ function ImageGridItem({ photoUrl }: { photoUrl: string }) {
       src={photoUrl}
       alt={`bread-img-`}
       fill
+      priority
       style={{
         objectFit: 'cover',
       }}

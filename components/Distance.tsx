@@ -7,7 +7,7 @@ interface Coordinates {
   latitude: number;
   longitude: number;
 }
-export default function Distance({ latitude, longitude }: Coordinates) {
+export function Distance({ latitude, longitude }: Coordinates) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
