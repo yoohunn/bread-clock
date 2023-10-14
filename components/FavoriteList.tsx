@@ -10,7 +10,7 @@ export function FavoriteList({}: Props) {
   const favoriteList = bakeries?.filter((i) => i.favorite);
 
   return (
-    <div className={'flex-1'}>
+    <div style={{ height: 'calc(100% - 64px)' }} className={'pb-16'}>
       {favoriteList?.length === 0 ? (
         <div className='p-4'>
           <div className='w-full h-[180px] px-4 py-10 bg-white rounded-xl flex-col justify-center items-center gap-4 inline-flex'>
@@ -28,7 +28,7 @@ export function FavoriteList({}: Props) {
           </div>
         </div>
       ) : (
-        <BakeryList className={'h-[675px] pb-10'} bakeries={favoriteList} />
+        <BakeryList className={'h-full pb-10'} bakeries={favoriteList} />
       )}
     </div>
   );

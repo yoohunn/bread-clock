@@ -17,6 +17,8 @@ export function FavoriteButton({ id }: Props) {
     e.preventDefault();
     e.stopPropagation();
 
+    console.log('🌟🌟🌟🌟click: ', favorite);
+
     if (typeof favorite === 'undefined') {
       return;
     }

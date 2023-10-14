@@ -14,6 +14,7 @@ export function useFavorite(id: number) {
 
   const toggle = async (favorite: boolean) => {
     if (!tokenStorage.access || !bakery) {
+      toast('로그인이 필요합니다');
       return;
     }
     if (favorite) {
